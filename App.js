@@ -13,6 +13,7 @@ export default function App() {
   const [minTemp, setMinTemp] = React.useState()
   const [date, setDate] = React.useState()
   const [showLoading, setShowLoading] = React.useState(true)
+  const [tomorrowIcon, setTomorrowIcon] = React.useState()
   let timer1 = setTimeout(() => setShowLoading(true), 5000)
 
   React.useEffect(() => {
@@ -32,34 +33,34 @@ export default function App() {
   
   var day_name = ''
   switch (date) {
-    case 0:
+    case 1:
         day_name = "Chủ nhật";
         break;
-    case 1:
+    case 2:
         day_name = "Thứ hai";
         break;
-    case 2:
+    case 3:
         day_name = "Thứ ba";
         break;
-    case 3:
+    case 4:
         day_name = "Thứ tư";
         break;
-    case 4:
+    case 5:
         day_name = "Thứ năm";
         break;
-    case 5:
+    case 6:
         day_name = "Thứ sau";
         break;
-    case 6:
+    case 0:
         day_name = "Thứ bảy";
     }
 
-  // console.log(day)
+  console.log(`https:${conditionIcon}`)
 
   return (
-    <ImageBackground source={require('./assets/dayImage.jpeg')} style={styles.container}>
+    <ImageBackground source={require('./assets/day.jpg')} style={styles.container}>
       <Text style={styles.title}>{location}</Text>
-      <Image style={styles.conditionIcon} source={ (conditionIcon != null) ? `https:${conditionIcon}` : '' } />
+      <Image style={styles.conditionIcon} source={{ uri: (conditionIcon) ? `https:${conditionIcon}` : `https://cdn.weatherapi.com/weather/64x64/day/122.png` }} />
       <View style={styles.weather}>
         <Text style={styles.temperature}>
           <Text>{temperature}</Text>
@@ -70,7 +71,10 @@ export default function App() {
       <View style={styles.forecast}>
         <Text style={styles.colorWhite}>{maxTemp}°C / {minTemp}°C {day_name}</Text>
       </View>
-      <StatusBar style="auto" />
+      <View style={styles.forecastTomorrow}>
+        <Image style={styles.tomorrowIcon} source={{ uri: (conditionIcon) ? `https:${conditionIcon}` : `https://cdn.weatherapi.com/weather/64x64/day/122.png` }} />
+      </View>
+      {/* <StatusBar style="auto" /> */}
     </ImageBackground>
   );
 }
@@ -80,16 +84,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'start',
-    marginTop: 20,
-    paddingLeft: '20px',
-    paddingRight: '20px',
+    justifyContent: 'flex-start',
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 
   title: {
     fontWeight: 'bold',
-    fontSize: '30px',
-    marginBottom: '40px',
+    fontSize: 30,
+    marginBottom: 40,
     color: '#fff'
 
   },
@@ -101,39 +104,43 @@ const styles = StyleSheet.create({
   },
 
   temperature: {
-    fontSize: '50px',
-    justifyContent: 'start',
-    width: '100%',
-    flexDirection: 'column',
-    color: '#fff'
+    fontSize: 50,
+    justifyContent: 'flex-start',
+    flex: 2,
+    color: '#fff',
+    position: 'relative',
   },
 
   condition: {
-    textAlign: 'end',
-    fontSize: '30px',
-    width: '100%',
-    alignItems: 'start',
-    color: '#fff'
+    fontSize: 30,
+    textAlign: 'right',
+    color: '#fff',
+    flex: 2
   },
 
   conditionIcon: {
-    width: '200px',
-    height: '200px',
+    width: 200,
+    height: 200,
   },
 
   degreeText: {
-    fontSize: '20px',
+    fontSize: 20,
     position: 'absolute',
-    top: 10,
+    top: 0,
+    // left: 0,
     color: '#fff'
   },
   
   forecast: {
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     width: '100%',
   },
 
   colorWhite: {
     color: '#fff'
+  },
+
+  forecastTomorrow: {
+
   }
 });
