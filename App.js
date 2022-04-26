@@ -88,7 +88,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-
+  gitCheck: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   title: {
     fontWeight: 'bold',
     fontSize: 30,
